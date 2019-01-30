@@ -6,8 +6,8 @@ This problem provides practice at:
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Shixin Yan.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ###############################################################################
 # Students:
@@ -36,9 +36,9 @@ import rosegraphics as rg
 
 def main():
     """ Calls the   TEST   functions in this module. """
-    run_test_practice_problem4a()
-    run_test_practice_problem4b()
-    run_test_practice_problem4c()
+    # run_test_practice_problem4a()
+    # run_test_practice_problem4b()
+    # run_test_practice_problem4c()
     run_test_practice_problem4d()
 
 
@@ -135,14 +135,18 @@ def practice_problem4a(sequence):
       :type sequence: list | tuple | string
     """
     ###########################################################################
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     ###########################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:   15 minutes.
     ###########################################################################
-
+    list = []
+    for k in range(len(sequence)-1):
+        if sequence[k] == sequence[k+1]:
+            list = list + [k]
+    return list
 
 def run_test_practice_problem4b():
     """ Tests the    practice_problem4b    function. """
@@ -198,14 +202,21 @@ def practice_problem4b(sequence):
       :type sequence: (list | tuple) of (float | int)
     """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     ###########################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      5
     #    TIME ESTIMATE:   10 minutes.
     ###########################################################################
-
+    largest = -99999
+    if len(sequence) == 2:
+        return sequence[0]
+    else:
+        for k in range(0,len(sequence),2):
+            if sequence[k] > largest:
+                largest = sequence[k]
+        return largest
 
 def run_test_practice_problem4c():
     """ Tests the    practice_problem4c    function. """
@@ -296,7 +307,7 @@ def practice_problem4c(points):
       :rtype: rg.Point | string
     """
     ###########################################################################
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #     The testing code is already written for you (above).
     #
     # IMPORTANT: This problem is your LOWEST PRIORITY for preparing
@@ -307,6 +318,25 @@ def practice_problem4c(points):
     #    DIFFICULTY:      9
     #    TIME ESTIMATE:   15 minutes.
     ###########################################################################
+    i=0
+    x=0
+    y=0
+    while True:
+        if is_prime(points[i].x) & is_prime(points[i].y):
+            x=points[i].x
+            y=points[i].y
+            points[i].x=y
+            points[i].y=x
+            break
+        else:
+            i = i+1
+            if i == len(points):
+                break
+    if x==0:
+        return ('Not found')
+    else:
+        return rg.Point(y,x)
+
 
 
 def run_test_practice_problem4d():
@@ -392,14 +422,20 @@ def practice_problem4d(sequence):
       :rtype: int
     """
     ###########################################################################
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #     The testing code is already written for you (above).
     ###########################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:   15 minutes.
     ###########################################################################
-
+    sum = 0
+    for k in range(len(sequence)-1):
+        if is_prime(sequence[k]):
+            if sequence[k]!=sequence[k+1]:
+                if is_prime(sequence[k+1]):
+                    sum = sum + sequence[k]
+    return sum
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
